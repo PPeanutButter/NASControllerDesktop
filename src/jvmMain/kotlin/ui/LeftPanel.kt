@@ -15,31 +15,30 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun LeftPanel() {
-    var selected by remember { mutableStateOf(0) }
+fun LeftPanel(selected: Int, onClick: (Int) -> Unit) {
     var showActionTitle by remember { mutableStateOf(true) }
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.fillMaxHeight().wrapContentWidth().background(Color(red = 247, green = 247, blue = 247))
+        modifier = Modifier.fillMaxHeight().wrapContentWidth().background(theme.Color.leftPanelBackground)
     ) {
         Column {
             Aria2Actions(id = 0, showActionTitle, select = selected) {
-                selected = it
+                onClick(it)
             }
             ChangeNotificationActions(id = 1, showActionTitle, select = selected) {
-                selected = it
+                onClick(it)
             }
             NASActions(id = 2, showActionTitle, select = selected) {
-                selected = it
+                onClick(it)
             }
             SystemInfoActions(id = 3, showActionTitle, select = selected) {
-                selected = it
+                onClick(it)
             }
             FileManagerActions(id = 4, showActionTitle, select = selected) {
-                selected = it
+                onClick(it)
             }
             SettingsActions(id = 5, showActionTitle, select = selected) {
-                selected = it
+                onClick(it)
             }
         }
         HideTitleActions(showActionTitle) {

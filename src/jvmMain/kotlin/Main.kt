@@ -2,7 +2,9 @@
 import androidx.compose.material.MaterialTheme
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.material.Button
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -10,19 +12,34 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import model.SharedViewModel
+import screens.Aria2Screen
 import ui.LeftPanel
+import ui.NotImplement
 
 @Composable
 @Preview
 fun App() {
+    val viewModel by remember { mutableStateOf(SharedViewModel()) }
     MaterialTheme {
         Row {
-            LeftPanel()
+            var selected by remember { mutableStateOf(0) }
+            LeftPanel(selected){
+                selected = it
+            }
+            Surface(modifier = Modifier.weight(1f).fillMaxHeight()){
+                when(selected){
+                    0 -> Aria2Screen(sharedViewModel = viewModel)
+                    else -> NotImplement()
+                }
+            }
         }
     }
 }
