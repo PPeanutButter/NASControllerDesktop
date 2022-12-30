@@ -43,6 +43,7 @@ fun Aria2Item(task: Aria2Task, onSelected: ((isSelected: Boolean, task: Aria2Tas
         ) {
             Text(
                 modifier = Modifier
+                    .fillMaxWidth()
                     .clickable { selected = !selected },
                 text = task.files[0].getFileName(),
                 fontSize = 20.sp,
